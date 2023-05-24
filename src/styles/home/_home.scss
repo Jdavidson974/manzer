@@ -1,0 +1,36 @@
+.filter {
+    @extend .df-row;
+
+    .filter-title {
+        width: 30%;
+    }
+
+    .checkbox-container {
+        @extend .df-row;
+        width: 70%;
+
+        label {
+            margin: auto;
+        }
+    }
+}
+
+@media(max-width:528px) {
+    .filter {
+        @extend .df-row;
+
+        .filter-title {
+            width: 100%;
+        }
+
+        .checkbox-container {
+            width: 100%;
+
+            label {
+                margin: auto;
+                margin-top: 5px;
+            }
+        }
+    }
+
+}

@@ -40,3 +40,13 @@
         color: black;
     }
 }
+
+@media(max-width:528px) {
+    .user-box {
+        width: 50%;
+    }
+
+    .btnNavBarBox {
+        width: 30%;
+    }
+}
