@@ -1,0 +1,42 @@
+.navbar {
+    @extend .df-row;
+    background-color: black;
+    padding: 5px;
+}
+
+.logo {
+    @extend .df-row;
+    width: 20%;
+    justify-content: center;
+
+    img {
+        cursor: pointer;
+        width: 80px;
+        height: 80px;
+    }
+}
+
+.user-box {
+    @extend .df-row;
+    width: 60%;
+}
+
+.btnNavBarBox {
+    @extend .df-row;
+    width: 20%;
+    justify-content: center;
+
+    button {
+        border-radius: 10px;
+        border: solid white 1px;
+        background-color: black;
+        color: white;
+        padding: 5px;
+    }
+
+    button:hover {
+        border: solid black 1px;
+        background-color: white;
+        color: black;
+    }
+}

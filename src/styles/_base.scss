@@ -1,0 +1,17 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.df-col {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.df-row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
