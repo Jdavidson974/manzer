@@ -15,6 +15,66 @@
     }
 }
 
+.card-container {
+    @extend .df-row;
+}
+
+.card-repas {
+    width: 20%;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+}
+
+.card-repas-header {
+    @extend .df-row;
+    justify-content: center;
+    background-color: black;
+    border-radius: 10px 10px 0 0;
+
+    img {
+        width: 160px;
+        height: 160px;
+
+    }
+}
+
+.card-repas-body {
+    background-color: black;
+    padding: 10px;
+}
+
+.search {
+    @extend .df-row;
+
+    .search-title {
+        width: 30%;
+    }
+
+    .input-box {
+        @extend .df-row;
+        width: 50%;
+        align-items: center;
+
+        input {
+            border-radius: 10px;
+            height: 35px;
+            margin-right: 5px;
+            width: 70%;
+
+            &::placeholder {
+                text-align: center;
+            }
+        }
+
+        button {
+            height: 35px;
+            width: 25%;
+        }
+    }
+}
+
+
 @media(max-width:528px) {
     .filter {
         @extend .df-row;
