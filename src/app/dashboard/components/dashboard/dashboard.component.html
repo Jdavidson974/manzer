@@ -1,4 +1,5 @@
 <h1 class="text-center mt-2 mb-3">Repas du jours</h1>
+
 <div class="search">
     <h2 class="search-title ">Rechercher un repas : </h2>
     <div class="input-box">
@@ -9,92 +10,29 @@
 
 <button (click)="openModalCreate()" class="btn btn-success mb-3">Creer un repas</button>
 
-<div class="card-container">
-    <div class="card-repas">
-        <div class="card-repas-header">
-            <img src="assets/logo.jpg" alt="">
-        </div>
-        <div class="card-repas-body">
-            <div class="title">
-                <h4>Rougail saucisse</h4>
-            </div>
-            <div class="ingredient">
-                <span>#tomate #porc</span>
-            </div>
-            <div class="username">
-                <span>toto974</span>
-            </div>
-            <div class="action-btn mt-2">
-                <button class="btn-edit" (click)="openModalUpdate()">Editer</button>
-                <button class="btn-delete" (click)="openModalDelete()">Supprimer</button>
-            </div>
-        </div>
-    </div>
-    <div class="card-repas">
-        <div class="card-repas-header">
-            <img src="assets/logo.jpg" alt="">
-        </div>
-        <div class="card-repas-body">
-            <div class="title">
-                <h4>Rougail saucisse</h4>
-            </div>
-            <div class="ingredient">
-                <span>#tomate #porc</span>
-            </div>
-            <div class="username">
-                <span>toto974</span>
+<ng-container *ngIf="repas.value$|async as myRepas">
+    <ng-container *ngFor="let repas of myRepas">
+        <div class="card-container">
+            <div class="card-repas">
+                <div class="card-repas-header">
+                    <img src="assets/logo.jpg">
+                </div>
+                <div class="card-repas-body">
+                    <div class="title">
+                        <h4>{{repas.name}}</h4>
+                    </div>
+                    <div class="ingredient">
+                        <span>#{{repas.tag}}</span>
+                    </div>
+                    <div class="action-btn mt-2">
+                        <button class="btn-edit" (click)="openModalUpdate(repas.id)">Editer</button>
+                        <button class="btn-delete" (click)="openModalDelete(repas.id)">Supprimer</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card-repas">
-        <div class="card-repas-header">
-            <img src="assets/logo.jpg" alt="">
-        </div>
-        <div class="card-repas-body">
-            <div class="title">
-                <h4>Rougail saucisse</h4>
-            </div>
-            <div class="ingredient">
-                <span>#tomate #porc</span>
-            </div>
-            <div class="username">
-                <span>toto974</span>
-            </div>
-        </div>
-    </div>
-    <div class="card-repas">
-        <div class="card-repas-header">
-            <img src="assets/logo.jpg" alt="">
-        </div>
-        <div class="card-repas-body">
-            <div class="title">
-                <h4>Rougail saucisse</h4>
-            </div>
-            <div class="ingredient">
-                <span>#tomate #porc</span>
-            </div>
-            <div class="username">
-                <span>toto974</span>
-            </div>
-        </div>
-    </div>
-    <div class="card-repas">
-        <div class="card-repas-header">
-            <img src="assets/logo.jpg" alt="">
-        </div>
-        <div class="card-repas-body">
-            <div class="title">
-                <h4>Rougail saucisse</h4>
-            </div>
-            <div class="ingredient">
-                <span>#tomate #porc</span>
-            </div>
-            <div class="username">
-                <span>toto974</span>
-            </div>
-        </div>
-    </div>
-</div>
+    </ng-container>
+</ng-container>
 
 <app-modal #modalUpdate title="Modification du repas">
     <form>

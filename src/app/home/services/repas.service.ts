@@ -8,7 +8,11 @@ import { Repas } from '../models/repas.model';
 })
 export class RepasService extends ApiService {
   repasState: DataState<Repas[]> = new DataState<Repas[]>(null)
+  myRepasState: DataState<Repas[]> = new DataState<Repas[]>(null)
   getAllRepas() {
     this.get<Repas[]>('repas', this.repasState).subscribe()
+  }
+  getAllMyRepas() {
+    this.get<Repas[]>('repas/my-repas', this.myRepasState).subscribe()
   }
 }

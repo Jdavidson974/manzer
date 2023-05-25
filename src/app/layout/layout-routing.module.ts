@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { ProfilResolver } from '../auth/resolvers/profil.resolver';
+import { MyRepasResolver } from '../dashboard/resolvers/my-repas.resolver';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
         path: "mes-repas", loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule),
         canActivate: [
           AuthGuard
-        ]
+        ],
+        resolve: { myRepas: MyRepasResolver }
       },
     ]
 
