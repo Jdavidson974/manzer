@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
     const token = this.route.snapshot.queryParamMap.get('token');
     if (token) {
       localStorage.setItem('token', token);
-      this.router.navigateByUrl('/')
+      this.router.navigateByUrl('/mes-repas')
     }
   }
 

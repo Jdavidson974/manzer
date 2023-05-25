@@ -1,14 +1,29 @@
 <div class="navbar">
-    <div class="logo">
+    <div routerLink="/" class="logo">
         <img src="/assets/logo.jpg" alt="">
     </div>
     <!-- prevoir la box pour la connexion -->
-    <div class="user-box"></div>
-    <div class="btnNavBarBox">
-        <a [href]="urlServer">
-            <button class="btn-connection">Se connecter</button>
-        </a>
+    <div class="user-box">
+        <ng-container *ngIf="profil.value$|async as profil;else noConnected">
+            <div class="profil">
+                <div class="profil-name">{{profil.username}}</div>
+                <img [src]="profil.picture" class="rounded-pill">
+            </div>
+            <div class="btnNavBarBox">
+                <a routerLink="/mes-repas">
+                    <button class="btn-connection">Mes repas</button>
+                </a>
+            </div>
+        </ng-container>
     </div>
+    <ng-template #noConnected>
+        <div class="btnNavBarBox">
+            <a [href]="urlServer">
+                <button class="btn-connection">Se connecter</button>
+            </a>
+        </div>
+    </ng-template>
+
 </div>
 <div class="container">
     <router-outlet></router-outlet>
