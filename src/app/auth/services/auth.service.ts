@@ -7,10 +7,10 @@ import { DataState } from 'src/app/shared/state/datastate';
 })
 export class AuthService {
 
-  SocialAccountInfo: DataState<SocialAccountRegister> = new DataState<SocialAccountRegister>(null)
+  socialAccountInfo: DataState<SocialAccountRegister> = new DataState<SocialAccountRegister>(null)
 
   setInfoAccountRegister(dataAccount: SocialAccountRegister) {
-    this.SocialAccountInfo.setValue$(dataAccount);
+    this.socialAccountInfo.setValue$(dataAccount);
   }
 
   constructor() { }

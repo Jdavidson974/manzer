@@ -17,12 +17,12 @@ export class GetSocialAccountInfoResolver implements Resolve<void> {
     const params: any = route.queryParams;
     let dataAccount !: SocialAccountRegister
     //CONEXION VIA GOOGLE
-    if (params.type == "google") {
-      dataAccount = {
-        email: params.email,
-        profilePicture: params.photo,
-      };
-    }
+    dataAccount = {
+      email: params.email,
+      profilePicture: params.photo,
+      firstname: params.prenom,
+      lastname: params.nom
+    };
     if (dataAccount) {
       this.authService.setInfoAccountRegister(dataAccount);
     }
