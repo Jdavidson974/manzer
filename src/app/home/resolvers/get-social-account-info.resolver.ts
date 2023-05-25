@@ -21,7 +21,7 @@ export class GetSocialAccountInfoResolver implements Resolve<void> {
       email: params.email,
       profilePicture: params.photo,
       firstname: params.prenom,
-      lastname: params.nom
+      lastname: params.nom,
     };
     if (dataAccount) {
       this.authService.setInfoAccountRegister(dataAccount);
