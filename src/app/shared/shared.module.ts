@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 
 
 @NgModule({
   declarations: [
-    CardComponent
+    CardComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   exports: [
     CardComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ModalComponent
   ]
 })
 export class SharedModule { }

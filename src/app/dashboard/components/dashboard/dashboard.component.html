@@ -1,11 +1,14 @@
-<h1 class="text-center mt-2">Repas du jours</h1>
-<div class="search my-5">
+<h1 class="text-center mt-2 mb-3">Repas du jours</h1>
+<div class="search">
     <h2 class="search-title ">Rechercher un repas : </h2>
     <div class="input-box">
         <input type="text" placeholder="Entrer le nom du repas / ingrédient / utilisateur">
         <button><fa-icon [icon]="iconSearch"></fa-icon></button>
     </div>
 </div>
+
+<button (click)="openModalCreate()" class="btn btn-success mb-3">Creer un repas</button>
+
 <div class="card-container">
     <div class="card-repas">
         <div class="card-repas-header">
@@ -21,21 +24,9 @@
             <div class="username">
                 <span>toto974</span>
             </div>
-        </div>
-    </div>
-    <div class="card-repas">
-        <div class="card-repas-header">
-            <img src="assets/logo.jpg" alt="">
-        </div>
-        <div class="card-repas-body">
-            <div class="title">
-                <h4>Rougail saucisse</h4>
-            </div>
-            <div class="ingredient">
-                <span>#tomate #porc</span>
-            </div>
-            <div class="username">
-                <span>toto974</span>
+            <div class="action-btn mt-2">
+                <button class="btn-edit" (click)="openModalUpdate()">Editer</button>
+                <button class="btn-delete" (click)="openModalDelete()">Supprimer</button>
             </div>
         </div>
     </div>
@@ -87,5 +78,51 @@
             </div>
         </div>
     </div>
-
+    <div class="card-repas">
+        <div class="card-repas-header">
+            <img src="assets/logo.jpg" alt="">
+        </div>
+        <div class="card-repas-body">
+            <div class="title">
+                <h4>Rougail saucisse</h4>
+            </div>
+            <div class="ingredient">
+                <span>#tomate #porc</span>
+            </div>
+            <div class="username">
+                <span>toto974</span>
+            </div>
+        </div>
+    </div>
 </div>
+
+<app-modal #modalUpdate title="Modification du repas">
+    <form>
+        <div class="nom-repas mb-4">
+            <span>nom du repas :</span>
+            <input type="text">
+        </div>
+        <div class="ingredient-repas">
+            <span>nom de l'ingeredient :</span>
+            <input type="text">
+        </div>
+    </form>
+    <button action class="btn btn-success">Valider</button>
+</app-modal>
+<app-modal #modalCreate title="Création d'un repas">
+    <form>
+        <div class="nom-repas mb-4">
+            <span>nom du repas :</span>
+            <input type="text">
+        </div>
+        <div class="ingredient-repas">
+            <span>nom de l'ingeredient :</span>
+            <input type="text">
+        </div>
+    </form>
+    <button action class="btn btn-success">Valider</button>
+</app-modal>
+<app-modal #modalDelete title="Suppression du repas">
+    <p>Êtes vous sur de vouloir supprimer ce repas ? </p>
+    <button action class="btn btn-danger">Supprimer</button>
+</app-modal>

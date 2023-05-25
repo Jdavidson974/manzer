@@ -1,0 +1,19 @@
+<!-- Modal -->
+<ng-template #content let-c="close" let-d="dismiss">
+    <!-- Modal header -->
+    <div class="modal-header border-bottom bg-dark text-white">
+        <h4 class="modal-title fw-semibold">
+            {{title}}
+        </h4>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="close()"></button>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body">
+        <ng-content></ng-content>
+    </div>
+    <!-- Modal footer -->
+    <div class="modal-footer  border-top">
+        <button type="button" class="btn btn-secondary" (click)="close()">Annuler</button>
+        <ng-content select="[action]"></ng-content>
+    </div>
+</ng-template>
