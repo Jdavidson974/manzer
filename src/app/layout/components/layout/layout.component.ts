@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout.component.sass']
 })
 export class LayoutComponent {
-
+  urlServer: string = "http://localhost:3000/auth/login-google"
 }
