@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { SocialAccountRegister } from '../models/socialAccountInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,7 @@ export class GetSocialAccountInfoResolver implements Resolve<void> {
     //CONEXION VIA GOOGLE
     if (params.type == "google") {
       dataAccount = {
-        type: params.type,
         email: params.email,
-        lastName: params.nom,
-        firstName: params.prenom,
         profilePicture: params.photo,
       };
     }

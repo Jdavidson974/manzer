@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalComponent } from './components/modal/modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -15,11 +16,13 @@ import { ModalComponent } from './components/modal/modal.component';
   imports: [
     CommonModule,
     FontAwesomeModule,
+    NgbModule
   ],
   exports: [
     CardComponent,
     FontAwesomeModule,
-    ModalComponent
+    ModalComponent,
+    NgbModule
   ]
 })
 export class SharedModule { }
