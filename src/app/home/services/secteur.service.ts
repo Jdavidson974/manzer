@@ -10,6 +10,7 @@ import { tap } from 'rxjs';
 export class SecteurService extends ApiService {
   secteursState: DataState<Secteur[]> = new DataState<Secteur[]>(null);
   getSecteursList() {
-    this.get<Secteur[]>("secteurs", this.secteursState).subscribe();
+    this.get<Secteur[]>("secteurs", this.secteursState).pipe(tap(a => console.log(a)
+    )).subscribe();
   }
 }

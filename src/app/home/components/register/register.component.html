@@ -15,31 +15,36 @@
         </div>
         <ng-container *ngIf="secteurs.value$|async as secteurs">
             <div class="form-register-box">
-                <form class="form-register">
+                <form [formGroup]="formRegister" class="form-register">
                     <div class="pseudo">
                         <span>
                             Votre pseudonyme :
                         </span>
-                        <input type="text">
+                        <input formControlName="pseudo" type="text">
                     </div>
                     <div class="secteur">
                         <span>Votre secteur</span>
                         <div class="checkbox-container mt-2 ">
                             <ng-container *ngFor="let secteur of secteurs">
-                                <input type="radio" name="secteur" class="btn-check" id="{{secteur.name}}"
-                                    autocomplete="off">
-                                <label class="btn btn-outline-success" for="{{secteur.name}}">{{secteur.name}}</label>
+                                <input type="radio" name="secteur" [value]="secteur.id" class="btn-check"
+                                    id="{{secteur.name}}" autocomplete="off">
+                                <label (click)="changeInputSelected(secteur.id)" class="btn btn-outline-success"
+                                    for="{{secteur.name}}">{{secteur.name}}</label>
                             </ng-container>
-
                         </div>
                     </div>
                 </form>
             </div>
-            <button class="btn btn-dark">Valider</button>
+            <ng-container *ngIf="formRegister.valid && inputSelected;else noValid">
+                <button (click)="submit()" class="btn btn-dark">Valider</button>
+            </ng-container>
         </ng-container>
     </ng-container>
 </ng-container>
 
 <ng-template #noAccount>
     Erreur lors de la recuperation de votre compte google nous vous invitons a reessayer..
+</ng-template>
+<ng-template #noValid>
+    <button class="btn btn-dark disabled">Valider</button>
 </ng-template>
