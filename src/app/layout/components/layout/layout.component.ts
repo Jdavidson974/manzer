@@ -15,6 +15,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   profil !: DataState<Profil>;
   ngOnInit(): void {
     this.profil = this.authService.profilState;
+
   }
 
   ngAfterViewInit(): void {
