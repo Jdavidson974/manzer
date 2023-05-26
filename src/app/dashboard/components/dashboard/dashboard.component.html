@@ -57,7 +57,7 @@
     </div>
 </ng-template>
 
-<app-modal #modalUpdate title="Modification du repas">
+<app-modal #modalUpdate title="Modification du repas {{titleRepasModal}}">
     <form [formGroup]="updateForm">
         <div class="nom-repas mb-4">
             <span>nom du repas :</span>
@@ -91,8 +91,8 @@
         </app-loading>
     </ng-container>
 </app-modal>
-<app-modal #modalDelete title="Suppression du repas">
-    <p>Êtes vous sur de vouloir supprimer ce repas ? </p>
+<app-modal #modalDelete title="Suppression du repas {{titleRepasModal}}">
+    <p>Êtes vous sur de vouloir supprimer le repas : <br> {{titleRepasModal}} ? </p>
     <app-loading action [dataState]="deleteState" [loadingTemplate]="loadingBtnDelete">
         <button (click)="deleteRepas()" class="btn btn-danger">Supprimer</button>
     </app-loading>

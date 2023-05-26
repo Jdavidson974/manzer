@@ -36,7 +36,8 @@ export class DashboardComponent implements OnInit {
   deleteState!: DataState<Repas>;
   formSearch!: FormGroup;
   initRepasTab !: Observable<Repas[] | null>;
-  repasTab$ !: Observable<Repas[] | null>;
+  repasTab$ !: Observable<Repas[] | null>
+  titleRepasModal: string = "";
   ngOnInit(): void {
 
 
@@ -103,15 +104,19 @@ export class DashboardComponent implements OnInit {
     this.repasSelected = id
     const repas = this.repasTab.find(item => item.id == this.repasSelected);
     if (repas) {
+      this.titleRepasModal = repas.name;
       this.updateForm.get('name')?.setValue(repas.name);
       this.updateForm.get('tag')?.setValue(repas.tag);
-
+      this.modalUpdate.open();
     }
-    this.modalUpdate.open();
   }
   openModalDelete(id: number) {
-    this.repasSelected = id;
-    this.modalDelete.open();
+    this.repasSelected = id
+    const repas = this.repasTab.find(item => item.id == this.repasSelected);
+    if (repas) {
+      this.titleRepasModal = repas.name;
+      this.modalDelete.open();
+    }
   }
   openModalCreate() {
     this.modalCreate.open()
