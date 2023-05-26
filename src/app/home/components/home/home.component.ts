@@ -18,12 +18,14 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private repasService: RepasService,
+    private secteurService: SecteurService,
   ) { }
   iconSearch = faSearch;
   secteurs !: DataState<Secteur[]>;
   repas !: DataState<Repas[]>;
   ngOnInit(): void {
-    this.repas = this.repasService.myRepasState;
+    this.secteurs = this.secteurService.secteursState;
+    this.repas = this.repasService.repasState;
     const token = this.route.snapshot.queryParamMap.get('token');
     if (token) {
       localStorage.setItem('token', token);

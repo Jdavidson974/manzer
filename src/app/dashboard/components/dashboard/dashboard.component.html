@@ -10,9 +10,9 @@
 
 <button (click)="openModalCreate()" class="btn btn-success mb-3">Creer un repas</button>
 
-<ng-container *ngIf="repas.value$|async as myRepas">
-    <ng-container *ngFor="let repas of myRepas">
-        <div class="card-container">
+<ng-container *ngIf="allRepas|async as myRepas">
+    <div class="card-container">
+        <ng-container *ngFor="let repas of myRepas">
             <div class="card-repas">
                 <div class="card-repas-header">
                     <img src="assets/logo.jpg">
@@ -30,37 +30,37 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </ng-container>
+        </ng-container>
+    </div>
 </ng-container>
 
 <app-modal #modalUpdate title="Modification du repas">
-    <form>
+    <form [formGroup]="updateForm">
         <div class="nom-repas mb-4">
             <span>nom du repas :</span>
-            <input type="text">
+            <input formControlName="name" type="text">
         </div>
         <div class="ingredient-repas">
             <span>nom de l'ingeredient :</span>
-            <input type="text">
+            <input formControlName="tag" type="text">
         </div>
     </form>
-    <button action class="btn btn-success">Valider</button>
+    <button action class="btn btn-success" (click)="update()">Valider</button>
 </app-modal>
 <app-modal #modalCreate title="Création d'un repas">
-    <form>
+    <form [formGroup]="createForm">
         <div class="nom-repas mb-4">
             <span>nom du repas :</span>
-            <input type="text">
+            <input formControlName="name" type="text">
         </div>
         <div class="ingredient-repas">
-            <span>nom de l'ingeredient :</span>
-            <input type="text">
+            <span>nom des ingeredients :</span>
+            <input formControlName="tag" type="text">
         </div>
     </form>
-    <button action class="btn btn-success">Valider</button>
+    <button action class="btn btn-success" (click)="createRepas()">Valider</button>
 </app-modal>
 <app-modal #modalDelete title="Suppression du repas">
     <p>Êtes vous sur de vouloir supprimer ce repas ? </p>
-    <button action class="btn btn-danger">Supprimer</button>
+    <button action (click)="deleteRepas()" class="btn btn-danger">Supprimer</button>
 </app-modal>
