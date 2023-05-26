@@ -93,14 +93,13 @@
         }
 
     }
-}
 
-@media(max-width:1000px) {
     .card-repas {
         width: 33%;
 
     }
 }
+
 
 @media(max-width:778px) {
     .search {
@@ -137,6 +136,11 @@
                 margin-top: 5px;
             }
         }
+    }
+
+    .card-repas {
+        width: 100%;
+
     }
 
 }
