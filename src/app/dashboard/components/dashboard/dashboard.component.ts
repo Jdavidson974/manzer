@@ -70,9 +70,6 @@ export class DashboardComponent implements OnInit {
       this.updateForm.get('name')?.setValue(repas.name);
       this.updateForm.get('tag')?.setValue(repas.tag);
 
-    } else {
-      console.log('ko');
-
     }
     this.modalUpdate.open();
   }
