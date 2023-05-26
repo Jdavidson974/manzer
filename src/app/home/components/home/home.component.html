@@ -1,16 +1,20 @@
 <h1 class="text-center mt-2">Repas du jours</h1>
 <app-loading [dataState]="secteurs" [loadingTemplate]="secteurLoading">
-    <ng-container *ngIf="secteurs.value$|async as secteurs">
-
+    <ng-container *ngIf="secteurs$|async as secteurs">
 
         <div class="filter mb-3">
             <h2 class="filter-title mt-2">Filtrer par secteur : </h2>
-            <div class="checkbox-container mt-2 ">
-                <ng-container *ngFor="let secteur of secteurs">
-                    <input type="checkbox" class="btn-check" [id]="secteur.id" autocomplete="off">
-                    <label class="btn btn-outline-success" [for]="secteur.id">{{secteur.name}}</label>
-                </ng-container>
-            </div>
+            <form [formGroup]="formSecteur">
+                <div class="checkbox-container mt-2 " formArrayName="checkbox">
+                    <ng-container [formGroupName]="i" *ngFor="let secteur of secteurs;let i = index">
+                        <input formControlName="checked" type="checkbox" class="btn-check" [id]="secteur.id"
+                            autocomplete="off">
+                        <label class="btn btn-outline-success" (click)="filterSecteur(secteur.id)"
+                            [for]="secteur.id">{{secteur.name}}</label>
+                    </ng-container>
+
+                </div>
+            </form>
         </div>
     </ng-container>
 </app-loading>
@@ -19,7 +23,7 @@
 </ng-template>
 
 <app-loading [dataState]="repas" [loadingTemplate]="repasLoading">
-    <ng-container *ngIf="repas.value$|async as repas">
+    <ng-container *ngIf="repasTab|async as repas">
         <div class="search my-5">
             <h2 class="search-title ">Rechercher un repas : </h2>
             <div class="input-box">
