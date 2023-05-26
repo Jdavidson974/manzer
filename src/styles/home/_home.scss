@@ -51,9 +51,13 @@
         width: 30%;
     }
 
+    form {
+        width: 70%
+    }
+
     .input-box {
         @extend .df-row;
-        width: 50%;
+        width: 100%;
         align-items: center;
 
         input {
@@ -76,6 +80,46 @@
     }
 }
 
+
+@media(max-width:1200px) {
+    .search {
+
+        .search-title {
+            width: 50%;
+        }
+
+        form {
+            width: 50%
+        }
+
+    }
+}
+
+@media(max-width:1000px) {
+    .card-repas {
+        width: 33%;
+
+    }
+}
+
+@media(max-width:778px) {
+    .search {
+
+        .search-title {
+            width: 100%;
+        }
+
+        form {
+            width: 100%
+        }
+
+    }
+
+    .card-repas {
+        width: 50%;
+
+    }
+}
 
 @media(max-width:528px) {
     .filter {
