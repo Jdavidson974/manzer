@@ -7,7 +7,7 @@ import { SecteurService } from '../../services/secteur.service';
 import { RepasService } from '../../services/repas.service';
 import { Repas } from '../../models/repas.model';
 import { Observable, of, pipe, tap } from 'rxjs';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +30,61 @@ export class HomeComponent implements OnInit {
   repasTab !: Observable<Repas[] | null>;
   initRepasTab !: Observable<Repas[] | null>;
   formSecteur!: FormGroup;
+  formSearch!: FormGroup;
   ngOnInit(): void {
+    this.secteursFlow();
+    this.repasFlow()
+
+    const token = this.route.snapshot.queryParamMap.get('token');
+    if (token) {
+      localStorage.setItem('token', token);
+      this.router.navigateByUrl('/mes-repas')
+    }
+
+  }
+  repasFlow() {
+    this.formSearch = this.formBuilder.group({
+      search: this.formBuilder.control('', Validators.required)
+    });
+    this.formSearch.valueChanges.pipe(
+      tap(
+        (value: { search: string }) => {
+          const search = value.search;
+          if (search.length) {
+            this.initRepasTab.pipe(
+              tap(
+                repas => {
+                  if (repas?.length) {
+                    let newRepasFilter: Repas[] = []
+                    repas.filter(item => {
+                      if (item.name.startsWith(search) || item.tag.startsWith(search) || item.user.username.startsWith(search)) {
+                        newRepasFilter = newRepasFilter.concat(item);
+                      }
+                    });
+                    this.repasTab = of(newRepasFilter);
+
+                  }
+                }
+              )
+            ).subscribe()
+          } else {
+            this.repasTab = this.initRepasTab
+          }
+
+        }
+      )
+    ).subscribe()
+    this.repas = this.repasService.repasState;
+    this.repasTab = this.repas.value$.pipe(
+      tap(
+        value => {
+          this.initRepasTab = of(value);
+        }
+      )
+    );
+
+  }
+  secteursFlow() {
     this.formSecteur = this.formBuilder.group({
       checkbox: this.formBuilder.array([],)
     })
@@ -98,36 +152,6 @@ export class HomeComponent implements OnInit {
         }
       )
     );
-    this.repas = this.repasService.repasState;
-
-    this.repasTab = this.repas.value$.pipe(
-      tap(
-        value => {
-          this.initRepasTab = of(value);
-        }
-      )
-    );
-
-    const token = this.route.snapshot.queryParamMap.get('token');
-    if (token) {
-      localStorage.setItem('token', token);
-      this.router.navigateByUrl('/mes-repas')
-    }
-
   }
-
-  filterSecteur(id: number) {
-
-
-  }
-
-  // this.initRepasTab.pipe(
-  //   tap(
-  //     repas => {
-  //       repas.fi
-  //     }
-  //   )
-  // ).subscribe()
-
 }
 
