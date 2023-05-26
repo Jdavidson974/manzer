@@ -1,43 +1,72 @@
 <h1 class="text-center mt-2">Repas du jours</h1>
-<ng-container *ngIf="secteurs.value$|async as secteurs">
+<app-loading [dataState]="secteurs" [loadingTemplate]="secteurLoading">
+    <ng-container *ngIf="secteurs.value$|async as secteurs">
 
 
-    <div class="filter mb-3">
-        <h2 class="filter-title mt-2">Filtrer par secteur : </h2>
-        <div class="checkbox-container mt-2 ">
-            <ng-container *ngFor="let secteur of secteurs">
-                <input type="checkbox" class="btn-check" [id]="secteur.id" autocomplete="off">
-                <label class="btn btn-outline-success" [for]="secteur.id">{{secteur.name}}</label>
+        <div class="filter mb-3">
+            <h2 class="filter-title mt-2">Filtrer par secteur : </h2>
+            <div class="checkbox-container mt-2 ">
+                <ng-container *ngFor="let secteur of secteurs">
+                    <input type="checkbox" class="btn-check" [id]="secteur.id" autocomplete="off">
+                    <label class="btn btn-outline-success" [for]="secteur.id">{{secteur.name}}</label>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</app-loading>
+<ng-template #secteurLoading>
+    <div class="w-100 mb-3 mt-2 loading" style="height: 80px;"></div>
+</ng-template>
+
+<app-loading [dataState]="repas" [loadingTemplate]="repasLoading">
+    <ng-container *ngIf="repas.value$|async as repas">
+        <div class="search my-5">
+            <h2 class="search-title ">Rechercher un repas : </h2>
+            <div class="input-box">
+                <input type="text" placeholder="Entrer le nom du repas / ingrédient / utilisateur">
+                <button><fa-icon [icon]="iconSearch"></fa-icon></button>
+            </div>
+        </div>
+        <div class="card-container">
+            <ng-container *ngFor="let item of repas">
+                <div class="card-repas">
+                    <div class="card-repas-header">
+                        <img src="assets/logo.jpg" alt="">
+                    </div>
+                    <div class="card-repas-body">
+                        <div class="title">
+                            <h4>{{item.name}}</h4>
+                        </div>
+                        <div class="ingredient">
+                            <span>#{{item.tag}}</span>
+                        </div>
+                        <div class="username">
+                            <span>{{item.user.username}}</span>
+                        </div>
+                    </div>
+                </div>
             </ng-container>
         </div>
-    </div>
-</ng-container>
-<ng-container *ngIf="repas.value$|async as repas">
-    <div class="search my-5">
-        <h2 class="search-title ">Rechercher un repas : </h2>
-        <div class="input-box">
-            <input type="text" placeholder="Entrer le nom du repas / ingrédient / utilisateur">
-            <button><fa-icon [icon]="iconSearch"></fa-icon></button>
+    </ng-container>
+</app-loading>
+
+<ng-template #repasLoading>
+    <div class="w-100 mb-3 mt-2 loading" style="height: 80px;"></div>
+    <div class="w-100 d-flex flex-row" style="height: 300px;">
+        <div class="d-flex flex-row" style="height: 296px; width: 20%; padding: 10px; ">
+            <div class="loading" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="d-flex flex-row" style="height: 296px; width: 20%; padding: 10px; ">
+            <div class="loading" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="d-flex flex-row" style="height: 296px; width: 20%; padding: 10px; ">
+            <div class="loading" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="d-flex flex-row" style="height: 296px; width: 20%; padding: 10px; ">
+            <div class="loading" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="d-flex flex-row" style="height: 296px; width: 20%; padding: 10px; ">
+            <div class="loading" style="width: 100%; height: 100%;"></div>
         </div>
     </div>
-    <div class="card-container">
-        <ng-container *ngFor="let item of repas">
-            <div class="card-repas">
-                <div class="card-repas-header">
-                    <img src="assets/logo.jpg" alt="">
-                </div>
-                <div class="card-repas-body">
-                    <div class="title">
-                        <h4>{{item.name}}</h4>
-                    </div>
-                    <div class="ingredient">
-                        <span>#{{item.tag}}</span>
-                    </div>
-                    <div class="username">
-                        <span>{{item.user.username}}</span>
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-    </div>
-</ng-container>
+</ng-template>
