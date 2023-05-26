@@ -4,17 +4,19 @@
     </div>
     <!-- prevoir la box pour la connexion -->
     <div class="user-box">
-        <ng-container *ngIf="profil.value$|async as profil;else noConnected">
-            <div class="profil">
-                <div class="profil-name">{{profil.username}}</div>
-                <img [src]="profil.picture" class="rounded-pill">
-            </div>
-            <div class="btnNavBarBox">
-                <a routerLink="/mes-repas">
-                    <button class="btn-connection">Mes repas</button>
-                </a>
-            </div>
-        </ng-container>
+        <app-loading class="w-100 d-flex flex-row" [dataState]="profil" [loadingTemplate]="navbarLoad">
+            <ng-container *ngIf="profil.value$|async as profil;else noConnected">
+                <div class="profil">
+                    <div class="profil-name">{{profil.username}}</div>
+                    <img [src]="profil.picture" class="rounded-pill">
+                </div>
+                <div class="btnNavBarBox">
+                    <a routerLink="/mes-repas">
+                        <button class="btn-connection">Mes repas</button>
+                    </a>
+                </div>
+            </ng-container>
+        </app-loading>
     </div>
     <ng-template #noConnected>
         <div class="btnNavBarBox">
@@ -28,3 +30,5 @@
 <div class="container">
     <router-outlet></router-outlet>
 </div>
+
+<ng-template #navbarLoad></ng-template>
