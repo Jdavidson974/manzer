@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalComponent } from './components/modal/modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     CardComponent,
-    ModalComponent
+    ModalComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    LoadingComponent,
   ]
 })
 export class SharedModule { }

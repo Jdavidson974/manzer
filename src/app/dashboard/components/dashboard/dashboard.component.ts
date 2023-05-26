@@ -31,7 +31,15 @@ export class DashboardComponent implements OnInit {
   repasSelected !: number;
   createForm!: FormGroup;
   updateForm !: FormGroup;
+  createState!: DataState<Repas>;
+  updateState!: DataState<Repas>;
+  deleteState!: DataState<Repas>;
   ngOnInit(): void {
+
+
+    this.createState = this.repasService.createRepasState;
+    this.updateState = this.repasService.updateRepasState;
+    this.deleteState = this.repasService.deleteRepasState;
     this.updateForm = this.formBuilder.group({
       name: this.formBuilder.control('', Validators.required),
       tag: this.formBuilder.control('', Validators.required),
@@ -79,16 +87,47 @@ export class DashboardComponent implements OnInit {
   createRepas() {
     if (this.createForm.valid) {
       this.repasService.create(this.createForm.value);
+      this.createState.isLoading$.pipe(
+        tap(
+          isLoading => {
+            if (!isLoading) {
+              this.repasService.getAllMyRepas();
+              this.modalCreate.close()
+              this.createForm.reset();
+            }
+          }
+        )
+      ).subscribe()
     }
   }
   deleteRepas() {
     this.repasService.deleteRepas(this.repasSelected);
+    this.deleteState.isLoading$.pipe(
+      tap(
+        isLoading => {
+          if (!isLoading) {
+            this.repasService.getAllMyRepas();
+            this.modalDelete.close()
+          }
+        }
+      )
+    ).subscribe()
   }
 
   update() {
     if (this.updateForm.valid) {
       const data = { ...this.updateForm.value, idRepas: this.repasSelected }
       this.repasService.update(data)
+      this.updateState.isLoading$.pipe(
+        tap(
+          isLoading => {
+            if (!isLoading) {
+              this.repasService.getAllMyRepas();
+              this.modalUpdate.close()
+            }
+          }
+        )
+      ).subscribe()
     }
 
   }

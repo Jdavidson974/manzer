@@ -1,0 +1,41 @@
+<ng-container *ngIf="error$ | async; else loading">
+    <ng-container *ngIf="errorTemplate; else errorDefault">
+        <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+    </ng-container>
+    <ng-template #errorDefault>
+        <!-- <div class="row mb-2 mt-2">
+        <div class="col-12 text-center " class="msgError">
+          {{errorMessage$ | async}}
+          <div class="row">
+            <div class="row p-4">
+              <div class="col-12 mb-3 d-flex justify-content-center">
+                <button (click)="reload()" type="button" class="btn btn-light">Réessayer</button>
+              </div>
+              <div class="col-12 d-flex justify-content-center">
+                <a routerLink="/contact" class="btn btn-light">Nous contacter</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </ng-template>
+</ng-container>
+
+<ng-template #loading>
+    <ng-container *ngIf="loading$ | async; else content">
+        <ng-container *ngIf="loadingTemplate; else loadingDefault">
+            <ng-container *ngTemplateOutlet="loadingTemplate"></ng-container>
+        </ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #loadingDefault>
+    <div [ngClass]="(loading$ | async) ? 'loading': ''" class="h-100 w-100">
+        loading..
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #content>
+    <ng-content></ng-content>
+</ng-template>
