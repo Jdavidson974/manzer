@@ -12,14 +12,14 @@ export class AuthService extends ApiService {
 
 
   socialAccountInfo: DataState<SocialAccountRegister> = new DataState<SocialAccountRegister>(null)
-  createUserState: DataState<any> = new DataState<any>(null);
+  createUserState: DataState<Profil> = new DataState<Profil>(null);
   profilState: DataState<Profil> = new DataState<Profil>(null);
   isLogged: Observable<boolean> = of(false);
   setInfoAccountRegister(dataAccount: SocialAccountRegister) {
     this.socialAccountInfo.setValue$(dataAccount);
   }
   createAccount(data: any) {
-    this.post<any>('utilisateurs/create', this.createUserState, data).subscribe();
+    this.post<Profil>('utilisateurs/create', this.createUserState, data).subscribe();
   }
 
   getProfil() {

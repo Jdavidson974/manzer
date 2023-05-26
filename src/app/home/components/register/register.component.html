@@ -36,7 +36,9 @@
                 </form>
             </div>
             <ng-container *ngIf="formRegister.valid && inputSelected;else noValid">
-                <button (click)="submit()" class="btn btn-dark">Valider</button>
+                <app-loading [dataState]="createUserState" [loadingTemplate]="btnLoading">
+                    <button (click)="submit()" class="btn btn-dark">Valider</button>
+                </app-loading>
             </ng-container>
         </ng-container>
     </ng-container>
@@ -47,4 +49,12 @@
 </ng-template>
 <ng-template #noValid>
     <button class="btn btn-dark disabled">Valider</button>
+</ng-template>
+
+<ng-template #btnLoading>
+    <button class="btn btn-dark disabled">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </button>
 </ng-template>

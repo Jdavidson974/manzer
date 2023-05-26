@@ -58,6 +58,9 @@ export class DashboardComponent implements OnInit {
       tap(
         repas => {
           if (repas) {
+            console.log(repas
+            );
+
             this.repasTab = repas
             this.initRepasTab = of(repas)
           }
@@ -107,16 +110,20 @@ export class DashboardComponent implements OnInit {
       this.titleRepasModal = repas.name;
       this.updateForm.get('name')?.setValue(repas.name);
       this.updateForm.get('tag')?.setValue(repas.tag);
-      this.modalUpdate.open();
+
     }
+    this.modalUpdate.open();
   }
   openModalDelete(id: number) {
     this.repasSelected = id
     const repas = this.repasTab.find(item => item.id == this.repasSelected);
     if (repas) {
       this.titleRepasModal = repas.name;
-      this.modalDelete.open();
+      this.updateForm.get('name')?.setValue(repas.name);
+      this.updateForm.get('tag')?.setValue(repas.tag);
+
     }
+    this.modalDelete.open();
   }
   openModalCreate() {
     this.modalCreate.open()

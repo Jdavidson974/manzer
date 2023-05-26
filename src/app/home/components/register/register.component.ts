@@ -7,6 +7,7 @@ import { SocialAccountRegister } from '../../models/socialAccountInfo';
 import { take, tap } from 'rxjs';
 import { Secteur } from '../../models/secteur.model';
 import { SecteurService } from '../../services/secteur.service';
+import { Profil } from 'src/app/auth/models/profil.model';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,9 @@ export class RegisterComponent implements OnInit {
   secteurs!: DataState<Secteur[]>;
   formRegister!: FormGroup;
   inputSelected: number | null = null;
+  createUserState!: DataState<Profil>;
   ngOnInit(): void {
+    this.createUserState = this.authService.createUserState;
     this.formRegister = this.formBuilder.group({
       pseudo: this.formBuilder.control('', Validators.required),
     })
@@ -58,6 +61,15 @@ export class RegisterComponent implements OnInit {
               username: this.formRegister.get('pseudo')?.value
             }
             this.authService.createAccount(user);
+            this.createUserState.isLoading$.pipe(
+              tap(
+                isLoading => {
+                  if (!isLoading) {
+                    window.location.href = "https://manzer-api-jdavidson974.vercel.app/auth/login-google"
+                  }
+                }
+              )
+            ).subscribe()
           }
         }
       )
