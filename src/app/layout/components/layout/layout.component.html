@@ -4,7 +4,8 @@
     </div>
     <!-- prevoir la box pour la connexion -->
     <div class="user-box">
-        <app-loading class="w-100 d-flex flex-row" [dataState]="profil" [loadingTemplate]="navbarLoad">
+        <app-loading class="w-100 d-flex flex-row" [errorTemplate]="noConnected" [dataState]="profil"
+            [loadingTemplate]="navbarLoad">
             <ng-container *ngIf="profil.value$|async as profil;else noConnected">
                 <div class="profil">
                     <div class="profil-name">{{profil.username}}</div>
@@ -19,13 +20,12 @@
         </app-loading>
     </div>
     <ng-template #noConnected>
-        <div class="btnNavBarBox">
+        <div class="btnNavBarBox w-100 justify-content-end me-3">
             <a [href]="urlServer">
                 <button class="btn-connection">Se connecter</button>
             </a>
         </div>
     </ng-template>
-
 </div>
 <div class="container">
     <router-outlet></router-outlet>

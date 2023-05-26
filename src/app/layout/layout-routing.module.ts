@@ -16,7 +16,8 @@ const routes: Routes = [
         canActivate: [
           AuthGuard
         ],
-        resolve: { myRepas: MyRepasResolver }
+
+        resolve: { myRepas: MyRepasResolver, login: ProfilResolver }
       },
     ]
 

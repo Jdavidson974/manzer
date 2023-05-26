@@ -18,8 +18,8 @@ export class ApiService {
   httpClient = this._httpClient;
   toastServices = this._toastService;
   router = this._router;
-  apiUrl: string = "http://localhost:3000/";
-  // apiUrl: string = "https://manzer-api-jdavidson974.vercel.app/";
+  // apiUrl: string = "http://localhost:3000/";
+  apiUrl: string = "https://manzer-api-jdavidson974.vercel.app/";
   get<T>(path: string, processModel: DataState<T>, httpParam?: HttpParams): Observable<T> {
     processModel.setIsLoading$(true);
     processModel.setHasError$(false);
