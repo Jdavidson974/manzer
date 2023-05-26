@@ -3,14 +3,16 @@
 <div class="search">
     <h2 class="search-title ">Rechercher un repas : </h2>
     <div class="input-box">
-        <input type="text" placeholder="Entrer le nom du repas / ingrédient / utilisateur">
-        <button><fa-icon [icon]="iconSearch"></fa-icon></button>
+        <form [formGroup]="formSearch">
+            <input formControlName="search" type="text" placeholder="Entrer le nom du repas / ingrédient / utilisateur">
+            <button><fa-icon [icon]="iconSearch"></fa-icon></button>
+        </form>
     </div>
 </div>
 
-<button (click)="openModalCreate()" class="btn btn-success mb-3">Creer un repas</button>
+<button (click)="openModalCreate()" class="btn btn-success my-3">Creer un repas</button>
 <app-loading class="w-100" [dataState]="repas" [loadingTemplate]="repasLoading">
-    <ng-container *ngIf="allRepas|async as myRepas">
+    <ng-container *ngIf="repasTab$|async as myRepas">
         <div class="card-container">
             <ng-container *ngFor="let repas of myRepas">
                 <div class="card-repas">

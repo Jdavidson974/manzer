@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Observable, find, tap } from 'rxjs';
+import { Observable, find, of, tap } from 'rxjs';
 import { Repas } from 'src/app/home/models/repas.model';
 import { Secteur } from 'src/app/home/models/secteur.model';
 import { RepasService } from 'src/app/home/services/repas.service';
@@ -34,6 +34,9 @@ export class DashboardComponent implements OnInit {
   createState!: DataState<Repas>;
   updateState!: DataState<Repas>;
   deleteState!: DataState<Repas>;
+  formSearch!: FormGroup;
+  initRepasTab !: Observable<Repas[] | null>;
+  repasTab$ !: Observable<Repas[] | null>;
   ngOnInit(): void {
 
 
@@ -50,16 +53,49 @@ export class DashboardComponent implements OnInit {
     })
     this.secteurs = this.secteurService.secteursState;
     this.repas = this.repasService.myRepasState;
-    this.allRepas = this.repas.value$.pipe(
+    this.repasTab$ = this.repas.value$.pipe(
       tap(
         repas => {
           if (repas) {
             this.repasTab = repas
+            this.initRepasTab = of(repas)
           }
 
         }
       )
     )
+
+    this.formSearch = this.formBuilder.group({
+      search: this.formBuilder.control('', Validators.required)
+    });
+    this.formSearch.valueChanges.pipe(
+      tap(
+        (value: { search: string }) => {
+          const search = value.search;
+          if (search.length) {
+            this.initRepasTab.pipe(
+              tap(
+                repas => {
+                  if (repas?.length) {
+                    let newRepasFilter: Repas[] = []
+                    repas.filter(item => {
+                      if (item.name.startsWith(search) || item.tag.startsWith(search) || item.user.username.startsWith(search)) {
+                        newRepasFilter = newRepasFilter.concat(item);
+                      }
+                    });
+                    this.repasTab$ = of(newRepasFilter);
+
+                  }
+                }
+              )
+            ).subscribe()
+          } else {
+            this.repasTab$ = this.initRepasTab
+          }
+
+        }
+      )
+    ).subscribe()
 
   }
   openModalUpdate(id: number) {
