@@ -24,7 +24,7 @@ export class ApiService {
     processModel.setIsLoading$(true);
     processModel.setHasError$(false);
     processModel.setValue$(null);
-    return this.httpClient.get<T>(this.apiUrl + path, httpParam ? { params: httpParam } : {}).pipe(
+    return this.httpClient.get<T>(this.apiUrl + path + "/", httpParam ? { params: httpParam } : {}).pipe(
       take(1),
       tap(result => {
         processModel.setValue$(result);
@@ -41,7 +41,7 @@ export class ApiService {
     processModel.setIsLoading$(true);
     processModel.setHasError$(false);
     processModel.setValue$(null);
-    return this.httpClient.post<T>(this.apiUrl + path, params,).pipe(
+    return this.httpClient.post<T>(this.apiUrl + path + "/", params,).pipe(
       take(1),
       tap(result => {
         processModel.setValue$(result);
@@ -58,7 +58,7 @@ export class ApiService {
     processModel.setIsLoading$(true);
     processModel.setHasError$(false);
     processModel.setValue$(null);
-    return this.httpClient.patch<T>(this.apiUrl + path, params).pipe(
+    return this.httpClient.patch<T>(this.apiUrl + path + "/", params).pipe(
       tap(result => {
         processModel.setValue$(result);
         processModel.setIsLoading$(false);
@@ -75,7 +75,7 @@ export class ApiService {
     processModel.setIsLoading$(true);
     processModel.setHasError$(false);
     if (path) {
-      return this.httpClient.post(`${this.apiUrl}${endPoint}`, path, { responseType: 'blob' }).pipe(
+      return this.httpClient.post(`${this.apiUrl}${endPoint}/`, path, { responseType: 'blob' }).pipe(
         tap(
           result => {
             processModel.setIsLoading$(false);
@@ -86,7 +86,7 @@ export class ApiService {
         })
       );
     } else {
-      return this.httpClient.get(`${this.apiUrl}${endPoint}`, { responseType: 'blob' }).pipe(
+      return this.httpClient.get(`${this.apiUrl}${endPoint}/`, { responseType: 'blob' }).pipe(
         tap(
           result => {
             processModel.setIsLoading$(false);
@@ -102,7 +102,7 @@ export class ApiService {
     processModel.setIsLoading$(true);
     processModel.setHasError$(false);
     processModel.setValue$(null);
-    return this.httpClient.delete<T>(this.apiUrl + path).pipe(
+    return this.httpClient.delete<T>(this.apiUrl + path + "/").pipe(
       take(1),
       tap(result => {
         processModel.setValue$(result);
